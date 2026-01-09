@@ -22,12 +22,14 @@ class Product extends Model
         'cost_price',
         'selling_price',
         'stock_status',
+        'images', // Add this
     ];
 
-    // Casts for date and decimal fields
+    // Cast images as array
     protected $casts = [
         'purchase_date' => 'date',
         'cost_price' => 'decimal:2',
         'selling_price' => 'decimal:2',
+        'images' => 'array', // Important for multiple images
     ];
 }

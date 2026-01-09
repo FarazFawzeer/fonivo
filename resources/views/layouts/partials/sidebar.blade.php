@@ -73,13 +73,14 @@
                 </div>
             </li>
 
-             <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link menu-arrow" href="#sidebarProducts" data-bs-toggle="collapse" role="button"
                     aria-expanded="false" aria-controls="sidebarProducts">
                     <span class="nav-icon">
-                        <iconify-icon icon="solar:user-circle-outline"></iconify-icon>
+                        <iconify-icon icon="mdi:package-variant-closed"></iconify-icon>
                     </span>
-                    <span class="nav-text"> Products</span>
+                    <span class="nav-text">Products</span>
+
                 </a>
                 <div class="collapse" id="sidebarProducts">
                     <ul class="nav sub-navbar-nav">
@@ -97,15 +98,15 @@
 
 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.profile.edit') }}">
-                         <span class="nav-icon">
-                              <iconify-icon icon="solar:widget-2-outline"></iconify-icon>
-                         </span>
-                         <span class="nav-text"> Profile </span>
-                         
-                    </a>
-               </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.profile.edit') }}">
+                    <span class="nav-icon">
+                        <iconify-icon icon="solar:widget-2-outline"></iconify-icon>
+                    </span>
+                    <span class="nav-text"> Profile </span>
+
+                </a>
+            </li>
 
             {{-- <li class="nav-item">
                     <a class="nav-link menu-arrow" href="#sidebarAuthentication" data-bs-toggle="collapse" role="button"

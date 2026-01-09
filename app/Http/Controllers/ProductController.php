@@ -27,6 +27,7 @@ class ProductController extends Controller
             'cost_price'    => 'required|numeric|min:0',
             'selling_price' => 'required|numeric|min:0',
             'stock_status'  => 'required|in:available,sold,out_of_stock',
+            'images.*'      => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120', // max 5MB each
         ]);
 
         if ($validator->fails()) {
@@ -39,8 +40,20 @@ class ProductController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
+        $data = $request->all();
+
+        // Handle images
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('products', 'public'); // stored in storage/app/public/products
+                $imagePaths[] = $path;
+            }
+            $data['images'] = $imagePaths; // store as JSON in DB
+        }
+
         // Create product
-        $product = Product::create($request->all());
+        $product = Product::create($data);
 
         if ($request->ajax()) {
             return response()->json([
@@ -50,8 +63,9 @@ class ProductController extends Controller
             ]);
         }
 
-        return redirect()->route('products.create')->with('success', 'Product created successfully!');
+        return redirect()->route('admin.products.create')->with('success', 'Product created successfully!');
     }
+
 
     // Optional: product listing
     public function index()
