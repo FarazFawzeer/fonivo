@@ -1,8 +1,6 @@
-@extends('layouts.base', ['subtitle' => 'Login'])
-
-@section('body-attribuet')
+<?php $__env->startSection('body-attribuet'); ?>
     class="authentication-bg  bg-dark"
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 <style>
@@ -13,7 +11,7 @@
      }
 </style>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="account-pages py-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -30,19 +28,25 @@
                                         <img src="/images/fonivo.jpg" height="50" alt="logo light">
                                     </a>
                                 </div>
-                                {{-- <h4 class="fw-bold text-dark mb-2">Welcome Back!</h3>
-                                    <p class="text-muted">Login in to your account to continue</p> --}}
+                                
                             </div>
-                            <form method="POST" action="{{ route('login.post') }}" class="mt-4">
-                                @csrf
+                            <form method="POST" action="<?php echo e(route('login.post')); ?>" class="mt-4">
+                                <?php echo csrf_field(); ?>
 
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email Address</label>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        value="{{ old('email') }}" placeholder="Enter your email" required>
-                                    @error('email')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
+                                        value="<?php echo e(old('email')); ?>" placeholder="Enter your email" required>
+                                    <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <small class="text-danger"><?php echo e($message); ?></small>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
 
                                 <div class="mb-3">
@@ -51,9 +55,16 @@
                                     </div>
                                     <input type="password" class="form-control" id="password" name="password"
                                         placeholder="Enter your password" required>
-                                    @error('password')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
+                                    <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <small class="text-danger"><?php echo e($message); ?></small>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
 
                                 <div class="form-check mb-3">
@@ -73,4 +84,6 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.base', ['subtitle' => 'Login'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH F:\Personal Projects\Fonivo lk\fonivo\resources\views/auth/signin.blade.php ENDPATH**/ ?>

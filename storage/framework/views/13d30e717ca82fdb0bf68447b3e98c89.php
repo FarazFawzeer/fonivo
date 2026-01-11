@@ -1,7 +1,7 @@
-@extends('layouts.vertical', ['subtitle' => 'Product Create'])
 
-@section('content')
-    @include('layouts.partials.page-title', ['title' => 'Product', 'subtitle' => 'Create'])
+
+<?php $__env->startSection('content'); ?>
+    <?php echo $__env->make('layouts.partials.page-title', ['title' => 'Product', 'subtitle' => 'Create'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
     <div class="card">
         <div class="card-header">
@@ -9,89 +9,89 @@
         </div>
 
         <div class="card-body">
-            <div id="message"></div> {{-- Success / Error messages --}}
+            <div id="message"></div> 
 
-            <form id="createProductForm" action="{{ route('admin.products.store') }}" method="POST"
+            <form id="createProductForm" action="<?php echo e(route('admin.products.store')); ?>" method="POST"
                 enctype="multipart/form-data">
-                @csrf
+                <?php echo csrf_field(); ?>
 
                 <div class="row">
 
                     
-                    {{-- Product Type --}}
+                    
                     <div class="col-md-6 mb-3">
                         <label for="product_type" class="form-label">Product Type</label>
                         <select name="product_type" id="product_type" class="form-select" required>
                             <option value="">Select Type</option>
-                            <option value="phone" {{ old('product_type') == 'phone' ? 'selected' : '' }}>Phone</option>
-                            <option value="bike" {{ old('product_type') == 'bike' ? 'selected' : '' }}>Bike</option>
+                            <option value="phone" <?php echo e(old('product_type') == 'phone' ? 'selected' : ''); ?>>Phone</option>
+                            <option value="bike" <?php echo e(old('product_type') == 'bike' ? 'selected' : ''); ?>>Bike</option>
                         </select>
                         
                     </div>
 
 
-                     {{-- Product Code --}}
+                     
     <div class="col-md-6 mb-3">
         <label for="product_code" class="form-label">Product Code</label>
         <input type="text" name="product_code" id="product_code" class="form-control"
-               value="{{ old('product_code') }}" placeholder="Ex: P1001" required>
+               value="<?php echo e(old('product_code')); ?>" placeholder="Ex: P1001" required>
     </div>
     
-                    {{-- Product Name / Model --}}
+                    
                     <div class="col-md-6 mb-3">
                         <label for="name" class="form-label">Product Name / Model</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}"
+                        <input type="text" name="name" id="name" class="form-control" value="<?php echo e(old('name')); ?>"
                             placeholder="Ex: iPhone 15" required>
                     </div>
 
-                    {{-- Owner Name --}}
+                    
                     <div class="col-md-6 mb-3">
                         <label for="owner_name" class="form-label">Owner Name</label>
                         <input type="text" name="owner_name" id="owner_name" class="form-control"
-                            value="{{ old('owner_name') }}" placeholder="Ex: John Doe" required>
+                            value="<?php echo e(old('owner_name')); ?>" placeholder="Ex: John Doe" required>
                     </div>
 
-                    {{-- Owner Contact --}}
+                    
                     <div class="col-md-6 mb-3">
                         <label for="owner_contact" class="form-label">Owner Contact</label>
                         <input type="text" name="owner_contact" id="owner_contact" class="form-control"
-                            value="{{ old('owner_contact') }}" placeholder="Ex: +94771234567" required>
+                            value="<?php echo e(old('owner_contact')); ?>" placeholder="Ex: +94771234567" required>
                     </div>
 
-                    {{-- Purchase Date --}}
+                    
                     <div class="col-md-6 mb-3">
                         <label for="purchase_date" class="form-label">Purchase Date</label>
                         <input type="date" name="purchase_date" id="purchase_date" class="form-control"
-                            value="{{ old('purchase_date') }}" required>
+                            value="<?php echo e(old('purchase_date')); ?>" required>
                     </div>
 
-                    {{-- Cost Price --}}
+                    
                     <div class="col-md-6 mb-3">
                         <label for="cost_price" class="form-label">Cost Price</label>
                         <input type="number" step="0.01" name="cost_price" id="cost_price" class="form-control"
-                            value="{{ old('cost_price') }}" placeholder="Ex: 1500.00" required>
+                            value="<?php echo e(old('cost_price')); ?>" placeholder="Ex: 1500.00" required>
                     </div>
 
-                    {{-- Selling Price --}}
+                    
                     <div class="col-md-6 mb-3">
                         <label for="selling_price" class="form-label">Selling Price</label>
                         <input type="number" step="0.01" name="selling_price" id="selling_price" class="form-control"
-                            value="{{ old('selling_price') }}" placeholder="Ex: 1800.00" required>
+                            value="<?php echo e(old('selling_price')); ?>" placeholder="Ex: 1800.00" required>
                     </div>
 
-                    {{-- Stock Status --}}
+                    
                     <div class="col-md-6 mb-3">
                         <label for="stock_status" class="form-label">Stock Status</label>
                         <select name="stock_status" id="stock_status" class="form-select" required>
-                            <option value="available" {{ old('stock_status') == 'available' ? 'selected' : '' }}>Available
+                            <option value="available" <?php echo e(old('stock_status') == 'available' ? 'selected' : ''); ?>>Available
                             </option>
-                            <option value="sold" {{ old('stock_status') == 'sold' ? 'selected' : '' }}>Sold</option>
-                            <option value="out_of_stock" {{ old('stock_status') == 'out_of_stock' ? 'selected' : '' }}>Out
+                            <option value="sold" <?php echo e(old('stock_status') == 'sold' ? 'selected' : ''); ?>>Sold</option>
+                            <option value="out_of_stock" <?php echo e(old('stock_status') == 'out_of_stock' ? 'selected' : ''); ?>>Out
                                 of Stock</option>
                         </select>
                     </div>
 
-                    {{-- Product Images --}}
+                    
                     <div class="col-md-6 mb-3">
                         <label for="images" class="form-label">Product Images</label>
                         <input type="file" name="images[]" id="images" class="form-control" multiple>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                {{-- Submit --}}
+                
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">Create Product</button>
                 </div>
@@ -108,7 +108,7 @@
         </div>
     </div>
 
-    {{-- Optional: AJAX submission --}}
+    
     <script>
         document.getElementById('createProductForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -155,4 +155,6 @@
                 });
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.vertical', ['subtitle' => 'Product Create'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH F:\Personal Projects\Fonivo lk\fonivo\resources\views/products/create.blade.php ENDPATH**/ ?>

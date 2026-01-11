@@ -1,8 +1,17 @@
 @extends('layouts.base', ['subtitle' => 'Lock Screen'])
 
 @section('body-attribuet')
-    class="authentication-bg"
+    class="authentication-bg  bg-dark"
 @endsection
+
+
+<style>
+    .authentication-bg {
+          background: linear-gradient(90deg, hsl(0, 0%, 0%) 0%, hsl(0, 0%, 0%) 100%) !important;
+
+        
+     }
+</style>
 
 @section('content')
     <div class="account-pages py-5">
@@ -14,10 +23,10 @@
                             <div class="text-center">
                                 <div class="mx-auto mb-4 text-center auth-logo">
                                     <a href="#" class="logo-dark">
-                                        <img src="/images/vacayguider.png" height="100" width="200" alt="logo dark">
+                                        <img src="/images/fonivo.jpg" height="100" width="200" alt="logo dark">
                                     </a>
                                     <a href="#" class="logo-light">
-                                        <img src="/images/vacayguider.png" height="50" alt="logo light">
+                                        <img src="/images/fonivo.jpg" height="50" alt="logo light">
                                     </a>
                                 </div>
 

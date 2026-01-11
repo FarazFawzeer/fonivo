@@ -10,4 +10,4 @@
             </div>
         </div>
     </div>
-</footer>
+</footer><?php /**PATH F:\Personal Projects\Fonivo lk\fonivo\resources\views/layouts/partials/footer.blade.php ENDPATH**/ ?>
