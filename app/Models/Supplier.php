@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Supplier extends Model
 {
     protected $fillable = ['name','phone','email','address','notes'];
 
-    public function salesInvoices()
+    public function purchaseInvoices()
     {
-        return $this->hasMany(SalesInvoice::class);
+        return $this->hasMany(PurchaseInvoice::class);
     }
 }

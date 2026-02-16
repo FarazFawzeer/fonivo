@@ -2,35 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
-    use HasFactory;
-
-    // Table name (optional if it follows Laravel convention)
-    protected $table = 'products';
-
-    // Fillable fields for mass assignment
     protected $fillable = [
-        'product_type',
-        'name',
-        'product_code',
-        'owner_name',
-        'owner_contact',
-        'purchase_date',
-        'cost_price',
-        'selling_price',
-        'stock_status',
-        'images', // Add this
+        'category_id','name','brand','model','sku',
+        'default_cost_price','default_sell_price','is_active'
     ];
 
-    // Cast images as array
     protected $casts = [
-        'purchase_date' => 'date',
-        'cost_price' => 'decimal:2',
-        'selling_price' => 'decimal:2',
-        'images' => 'array', // Important for multiple images
+        'is_active' => 'boolean',
+        'default_cost_price' => 'decimal:2',
+        'default_sell_price' => 'decimal:2',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    // Phones
+    public function phoneUnits(): HasMany
+    {
+        return $this->hasMany(PhoneUnit::class);
+    }
+
+    // Accessories ledger
+    public function stockLedgers(): HasMany
+    {
+        return $this->hasMany(StockLedger::class);
+    }
 }
