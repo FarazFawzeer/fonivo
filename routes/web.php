@@ -15,7 +15,8 @@ use App\Http\Controllers\Admin\PurchaseInvoiceController;
 use App\Http\Controllers\Admin\SalesInvoiceController;
 use App\Http\Controllers\Admin\LedgerController;
 use App\Http\Controllers\Admin\ReportsController;
-
+use App\Http\Controllers\Admin\SalesInvoicePdfController;
+use App\Http\Controllers\Admin\DashboardController;
 
 require __DIR__ . '/auth.php';
 
@@ -114,6 +115,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('reports/due', [ReportsController::class, 'due'])->name('reports.due');
     Route::get('reports/daily-sales', [ReportsController::class, 'dailySales'])->name('reports.dailySales');
 
+
+    Route::get('sales/{sale}/pdf', [SalesInvoicePdfController::class, 'download'])
+    ->name('sales.pdf');
+
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -140,8 +147,11 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('index'); // create resources/views/dashboard.blade.php
-    });
+    // Route::get('/', function () {
+    //     return view('index'); // create resources/views/dashboard.blade.php
+    // });
+    
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });

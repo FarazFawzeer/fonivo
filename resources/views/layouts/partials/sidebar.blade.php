@@ -1,12 +1,12 @@
 <div class="app-sidebar">
     <!-- Sidebar Logo -->
     <div class="logo-box">
-        <a href="{{ route('any', 'index') }}" class="logo-dark">
+        <a href="{{ route('admin.dashboard') }}" class="logo-dark">
             <img src="/images/fonivo2.jpg" class="logo-sm" alt="logo sm">
             <img src="/images/fonivo2.jpg" class="logo-lg" alt="logo dark" style="width: 150px; height: 75px;">
         </a>
 
-        <a href="{{ route('any', 'index') }}" class="logo-light">
+        <a href="{{ route('admin.dashboard') }}" class="logo-light">
             <img src="/images/fonivo2.jpg" class="logo-sm" alt="logo sm">
             <img src="/images/fonivo2.jpg" class="logo-lg" alt="logo light" style="width: 150px; height: 75px;">
         </a>

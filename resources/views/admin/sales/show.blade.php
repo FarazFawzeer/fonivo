@@ -7,6 +7,8 @@
         $total = (float) ($sale->total_amount ?? 0);
         $paid = (float) ($sale->paid_amount ?? 0);
         $balance = (float) ($sale->balance_amount ?? 0);
+
+        $badge = $sale->status === 'paid' ? 'bg-success' : ($sale->status === 'partial' ? 'bg-warning' : 'bg-danger');
     @endphp
 
     <div class="card">
@@ -18,7 +20,16 @@
                     Date: <b>{{ $sale->sale_date?->format('d M Y') ?? '-' }}</b>
                 </p>
             </div>
-            <div class="d-flex gap-2">
+
+            <div class="d-flex align-items-center gap-2">
+                {{-- PDF Download (Icon only, no background) --}}
+                <a href="{{ route('admin.sales.pdf', $sale->id) }}"
+                    class="d-inline-flex align-items-center justify-content-center"
+                    style="width:34px;height:34px;border-radius:8px;color:#0d6efd;"
+                    data-bs-toggle="tooltip" title="Download PDF">
+                    <iconify-icon icon="solar:file-download-outline" width="20"></iconify-icon>
+                </a>
+
                 <a href="{{ route('admin.sales.index') }}" class="btn btn-light">Back</a>
             </div>
         </div>
@@ -30,9 +41,6 @@
                 <div class="col-md-3"><b>Paid:</b> {{ number_format($paid,2) }}</div>
                 <div class="col-md-3"><b>Balance:</b> {{ number_format($balance,2) }}</div>
                 <div class="col-md-3">
-                    @php
-                        $badge = $sale->status === 'paid' ? 'bg-success' : ($sale->status === 'partial' ? 'bg-warning' : 'bg-danger');
-                    @endphp
                     <span class="badge {{ $badge }}">{{ ucfirst($sale->status) }}</span>
                 </div>
             </div>
@@ -63,7 +71,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $it->phoneUnit?->imei1 ?? '-' }}</td>
-                                <td>{{ $it->qty }}</td>
+                                <td>{{ (int)($it->qty ?? 0) }}</td>
                                 <td>{{ number_format((float)($it->unit_sell_price ?? 0),2) }}</td>
                                 <td>{{ number_format((float)($it->line_total ?? 0),2) }}</td>
                                 <td>{{ $it->phone_unit_id ? number_format((float)($it->unit_cost_price_snapshot ?? 0),2) : '-' }}</td>
@@ -134,7 +142,7 @@
                         @forelse($sale->payments as $pay)
                             <tr>
                                 <td>{{ $pay->paid_at?->format('d M Y') ?? '-' }}</td>
-                                <td>{{ ucfirst($pay->method) }}</td>
+                                <td>{{ ucfirst($pay->method ?? '-') }}</td>
                                 <td>{{ $pay->reference_no ?? '-' }}</td>
                                 <td>{{ $pay->note ?? '-' }}</td>
                                 <td class="text-end">{{ number_format((float)($pay->amount ?? 0),2) }}</td>
