@@ -7,9 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class PurchaseInvoice extends Model
 {
     protected $fillable = [
-        'supplier_id','invoice_no','purchase_date',
-        'total_amount','paid_amount','balance_amount',
-        'status','note','created_by'
+        'supplier_id',
+        'invoice_no',
+        'purchase_date',
+        'total_amount',
+        'paid_amount',
+        'balance_amount',
+        'status',
+        'note',
+        'created_by'
     ];
 
     protected $casts = [
@@ -32,6 +38,7 @@ class PurchaseInvoice extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class, 'related_id')
-            ->where('related_type', 'purchase_invoice');
+            ->where('related_type', 'purchase_invoice')
+            ->latest('paid_at');
     }
 }

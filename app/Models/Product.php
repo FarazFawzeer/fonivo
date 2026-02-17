@@ -8,10 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Product extends Model
 {
     protected $fillable = [
-        'category_id','name','brand','model','sku',
-        'default_cost_price','default_sell_price','is_active'
+        'category_id',
+        'name',
+        'brand',
+        'model',
+        'sku',
+        'default_cost_price',
+        'default_sell_price',
+        'reorder_level',
+        'is_active'
     ];
-
     protected $casts = [
         'is_active' => 'boolean',
         'default_cost_price' => 'decimal:2',
